@@ -8,6 +8,9 @@ protected int disciplineScore;
 protected Transcript transcript;
 
 protected Student(String id,String fullName, String cohort, String major,int disciplineScore,Transcript transcript){
+    if (id == null || fullName == null || cohort == null || major == null) {
+        throw new IllegalArgumentException("String attributes must not be null");
+    }
     if(disciplineScore < 0 || disciplineScore > 100){
         throw new IllegalArgumentException("disciplineScore in range  [0, 100]");
     }
@@ -31,9 +34,20 @@ public String getMajor(){ return this.major;}
 public int    getDisciplineScore(){ return this.disciplineScore;}
 protected Transcript getTranscript(){return this.transcript;}
 
-public void setCohort(String cohort){this.cohort = cohort.trim();}
-public void setMajor(String major){this.major = major.trim();}
-public void setDisciplineScore(int disciplineScore){this.disciplineScore = disciplineScore;}
+public void setCohort(String cohort){
+    if (cohort == null || cohort.trim().isEmpty()) throw new IllegalArgumentException("Cohort invalid");
+    this.cohort = cohort.trim();
+}
+public void setMajor(String major){
+    if (major == null || major.trim().isEmpty()) throw new IllegalArgumentException("Major invalid");
+    this.major = major.trim();
+}
+public void setDisciplineScore(int disciplineScore){
+    if(disciplineScore < 0 || disciplineScore > 100){
+        throw new IllegalArgumentException("disciplineScore in range [0, 100]");
+    }
+    this.disciplineScore = disciplineScore;
+}
 
 public String getEnglishName(){
     String[] parts = this.fullName.split("\\s+");

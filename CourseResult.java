@@ -24,11 +24,11 @@ public CourseResult(String courseId,int credits,double score){
 public String getCourseId(){
     return this.courseId;
 }
-
+@Override
 public int getCredits(){
     return this.credits;
 }
-
+@Override
 public double getScore(){
     return this.score;
 }

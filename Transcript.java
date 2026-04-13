@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Transcript 
 {
@@ -10,9 +9,10 @@ public Transcript(){
     this.results = new ArrayList<>();
 };
 public void addCourseResult(CourseResult r){
-    if(r != null){
-        this.results.add(r);
+    if (r == null) {
+        throw new IllegalArgumentException("CourseResult must not be null");
     }
+    this.results.add(r);
 }
 
 public double gpa4(){
@@ -29,6 +29,7 @@ public double gpa4(){
         sum_score += gpa4_courese*course.getCredits();
         total_credits += course.getCredits();
     }
+    if (total_credits == 0) return 0.0;
     return Math.round((sum_score/total_credits)*10.0)/10.0;
 }
 
@@ -44,7 +45,7 @@ public int failedCount(){
 }
 
 public List<CourseResult>  getResults(){
-    return Collections.unmodifiableList(this.results);
+    return List.copyOf(this.results);
 }
 
 }
